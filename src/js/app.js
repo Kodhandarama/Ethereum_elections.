@@ -13,10 +13,12 @@ App = {
     if (typeof web3 !== 'undefined') {
       // If a web3 instance is already provided by Meta Mask.
       App.web3Provider = web3.currentProvider;
+      ethereum.enable();
       web3 = new Web3(web3.currentProvider);
     } else {
       // Specify default instance if no web3 instance provided
       App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
+      ethereum.enable();
       web3 = new Web3(App.web3Provider);
     }
     return App.initContract();
@@ -41,7 +43,7 @@ App = {
       // Restart Chrome if you are unable to receive this event
       // This is a known issue with Metamask
       // https://github.com/MetaMask/metamask-extension/issues/2393
-      instance.votedEvent({}, {
+      instance.votedEvent({
         fromBlock: 0,
         toBlock: 'latest'
       }).watch(function(error, event) {
@@ -58,7 +60,7 @@ App = {
     var content = $("#content");
 
     loader.show();
-    content.hide();
+    content.show();
 
     // Load account data
     web3.eth.getCoinbase(function(err, account) {
