@@ -6,6 +6,9 @@ contract Election{
         string name;
         uint voteCount;
     }
+    //Store accounts that have voted
+    mapping(address =>bool) public voters;
+    //Store Candidates
     //fetch candidate
     mapping(uint => Candidate)public candidates;
     //Store candidates count
@@ -18,6 +21,17 @@ contract Election{
     function addCandidate(string memory _name) private{
         candidatesCount ++;
         candidates[candidatesCount] = Candidate(candidatesCount, _name,0);
+
+    }
+
+    function vote(uint _candidateID)public{
+        // record that voter has voted
+         require(!voters[msg.sender]);
+
+        //voters[msg.sender] = true;
+        //update candidate vote count
+
+        candidates[_candidateID].voteCount ++;
 
     }
 
