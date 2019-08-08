@@ -43,7 +43,7 @@ App = {
       // Restart Chrome if you are unable to receive this event
       // This is a known issue with Metamask
       // https://github.com/MetaMask/metamask-extension/issues/2393
-      instance.votedEvent({
+      instance.votedEvent({}, {
         fromBlock: 0,
         toBlock: 'latest'
       }).watch(function(error, event) {
@@ -60,6 +60,7 @@ App = {
     var content = $("#content");
 
     loader.show();
+    content.hide();
     content.show();
 
     // Load account data
@@ -102,7 +103,7 @@ App = {
       if(hasVoted) {
         $('form').hide();
       }
-      loader.hide();
+      loader.show();
       content.show();
     }).catch(function(error) {
       console.warn(error);
